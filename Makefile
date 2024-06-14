@@ -17,7 +17,8 @@ venv_nuke:
 	./.venv/bin/pip install -r requirements.txt
 
 install_llama:
-
+	curl -fsSL https://ollama.com/install.sh | sh
+	ollama pull llama3:latest
 
 docker_notebook:
 	docker run -it --rm \
