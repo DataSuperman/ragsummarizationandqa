@@ -1,0 +1,38 @@
+{
+  "llm_type": "llama3",
+  "openai": {
+    "model_name": "gpt-3.5-turbo-0125",
+    "temperature": 0.0,
+    "max_tokens": 1000,
+    "api_key": ""
+  },
+  "llama3": {
+    "model_name": "llama3",
+    "temperature": 0.0,
+    "max_tokens": 1000
+  },
+  "chunk_size": 1000,
+  "default_summarizer": "mapreduce",
+  "mapreduce_summarizer": {
+    "map_template": "The following is set of summaries: {docs} Take these and distill it into a final, consolidated summary of the main themes,so the manager of the representative can have a holistic view of the call. The summary can be maximum 60 words Helpful Answer:",
+    "reduce_template": "The following is set of summaries:\n{docs}\nTake these and distill it into a final, consolidated summary of the main themes, \nso the manager of the representative can have a holistic view of the call.\nThe summary can be maximum 60 words\nHelpful Answer:"
+  },
+  "stuff_summarizer": {
+    "prompt_template": "Write a concise summary of the following document in less than 60 words:\n{docs}\nCONCISE SUMMARY:"
+  },
+  "refine_summarizer": {
+    "prompt_template": "Write a concise summary of the following text:\n{docs}\nCONCISE SUMMARY:",
+    "refine_template": "Your job is to produce a final summary in 60 words or less\"\n    \"We have provided an existing summary up to a certain point: {existing_answer}\\n\"\n    \"We have the opportunity to refine the existing summary\"\n    \"(only if needed) with some more context below.\\n\"\n    \"------------\\n\"\n    \"{docs}\\n\"\n    \"------------\\n\"\n    \"Given the new context, refine the summary\"\n    \"If the context isn't useful, return the original summary.\"\n    \"Summarize the final output into bullet points with 60 words or less.\""
+  },
+  "embedding_model": {
+    "model_name": "openaiembeddings"
+  },
+  "vector_database": {
+    "database_name": "chroma"
+  },
+  "question_answering": {
+    "grader_system_prompt": " You are a grader assessing relevance of a retrieved document to a user question. \\n \n    If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant. \\n\n    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question.",
+    "hallucination_system_prompt": "\"You are a grader assessing whether an LLM generation is grounded in / supported by a set of retrieved facts. \\n \n     Give a binary score 'yes' or 'no'. 'Yes' means that the answer is grounded in / supported by the set of facts.",
+    "answer_relevance_system_prompt": "You are a grader assessing whether an answer addresses / resolves a question \\n \n     Give a binary score 'yes' or 'no'. Yes' means that the answer resolves the question."
+  }
+}
